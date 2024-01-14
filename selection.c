@@ -11,6 +11,7 @@
 // | 3 | 4 | 5 | 6 _| 7 | 8 _| 9 |
 // | 3 | 4 | 5 | 6 _| 7 | 8 | 9 _|
 // • Subtract and Conquer
+// • left to right sort
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -61,3 +62,21 @@ int main(){
     printArray(s);
     return 0;
 }
+// _________________________________________
+// • Depends on structure or content?    
+// • ->Structure
+// • Internal/External sort algorithm?
+// • ->Internal- O(1)
+// • Stable/Unstable sort algorithm ?
+// • ->Unstable
+// • Best case time complexity?
+// • ->O(n²)
+// • Worst case time complexity ?
+// • ->O(n²)
+// • Algorithmic Approach?
+// • ->Subtract and Conquer
+//             n
+//            / \
+//          1    n-1
+//         /       \
+//       1          n-2
