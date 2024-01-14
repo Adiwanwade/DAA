@@ -19,11 +19,11 @@ struct array{
     int size;
     int*arr;
 };
-void swap(int *a, int *b) {
-  int t = *a;
-  *a = *b;
-  *b = t;
-}
+// void swap(int *a, int *b) {
+//   int t = *a;
+//   *a = *b;
+//   *b = t;
+// } ---- not required in insertion sort
 
 void insertionSort(struct array*s) {
  int i, key, j;
