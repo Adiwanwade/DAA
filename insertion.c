@@ -1,17 +1,17 @@
-// •By taking default as ascending order so smallest
-// • First find the smallest element across the array start from the start(first element) and go till the end(last element)
-// • swap the smallest element with the first and making it as sorted and unsorted partition
-// • Then find next smallest from the unsorted array ans swap it with the first of unsorted and repeat till last
-// | 9 | 8 | 7 | 6 | 5 | 4 | 3 |
-// | 3 _| 8 | 7 | 6 | 5 | 4 | 9 |
-// | 3 | 4 _| 7 | 6 | 5 | 8 | 9 |
-// | 3 | 4 | 5 _| 6 | 7 | 8 | 9 |
-// | 3 | 4 | 5 | 6 _| 7 | 8 | 9 |
-// | 3 | 4 | 5 | 6 | 7 _| 8 | 9 |
-// | 3 | 4 | 5 | 6 _| 7 | 8 _| 9 |
-// | 3 | 4 | 5 | 6 _| 7 | 8 | 9 _|
-// • Subtract and Conquer
-// • left to right sort
+// • By taking default as ascending order
+// • Consider first element as sorted
+// • Pick one element put it in its right position and then pick another put it in its correct position.
+// • repeat this until all are sorted
+// • _ one to pick 
+// | 9 | 8 _| 7 | 6 | 5 | 4 | 3 |
+// | 8 | 9 | 7 _| 6 | 5 | 4 | 3 |
+// | 7 | 8 | 9 | 6 _| 5 | 4 | 3 |
+// | 6 | 7 | 8 | 9 | 5 _| 4 | 3 |
+// | 5 | 6 | 7 | 8 | 9 | 4 _| 3 |
+// | 4 | 5 | 6 | 7 | 8 | 9 | 3 _|
+// | 3 | 4 | 5 | 6 | 7 | 8 | 9 _|
+
+// like playing cards
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -24,19 +24,25 @@ void swap(int *a, int *b) {
   *a = *b;
   *b = t;
 }
-void selectionSort(struct array *s){
-int k,min,loc,j;
-for(k=0;k<=(s->size-2);k++){
-min=s->arr[k];
-loc=k;
-for(j=k+1;j<=s->size-1;j++){
-if(min>s->arr[j]){
-    min=s->arr[j];
-    loc=j;
-}
-}
-swap(&(s->arr[k]),&(s->arr[loc]));
-}
+
+void insertionSort(struct array*s) {
+ int i, key, j;
+    for (i = 1; i < s->size; i++) 
+    {
+        key = s->arr[i];
+        j = i - 1;
+ 
+        /* Move elements of s->arr[0..i-1], 
+           that are greater than key, 
+           to one position ahead of 
+           their current position */
+        while (j >= 0 && s->arr[j] > key) 
+        {
+            s->arr[j + 1] = s->arr[j];
+            j = j - 1;
+        }
+        s->arr[j + 1] = key;
+    }    
 }
 
 void printArray(struct array* s) {
@@ -57,20 +63,20 @@ int main(){
     for(i=0;i<s->size;i++){
         scanf("%d",&(s->arr[i]));
     }
-   selectionSort(s);
+   insertionSort(s);
     printf("The sorted array is:");
     printArray(s);
     return 0;
 }
 // _________________________________________
 // • Depends on structure or content?    
-// • ->Structure
+// • ->Both because of flag
 // • Internal/External sort algorithm?
 // • ->Internal- O(1)
 // • Stable/Unstable sort algorithm ?
-// • ->Unstable
+// • ->stable with flag
 // • Best case time complexity?
-// • ->O(n²)
+// • ->O(n) 
 // • Worst case time complexity ?
 // • ->O(n²)
 // • Algorithmic Approach?
