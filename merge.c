@@ -114,19 +114,59 @@ void printArray(struct array* s) {
 
 
 int main(){
-    int i=0;
-    struct array *s=(struct array*)malloc(sizeof(struct array));
-    printf("Enter the size of array:");
-    scanf("%d",&(s->size));
-    s->arr=(int*)malloc(s->size*sizeof(int));
-    printf("Enter the elements of array:\n");
-    for(i=0;i<s->size;i++){
-        scanf("%d",&(s->arr[i]));
+//     int i=0;
+//     struct array *s=(struct array*)malloc(sizeof(struct array));
+//     printf("Enter the size of array:");
+//     scanf("%d",&(s->size));
+//     s->arr=(int*)malloc(s->size*sizeof(int));
+//     printf("Enter the elements of array:\n");
+//     for(i=0;i<s->size;i++){
+//         scanf("%d",&(s->arr[i]));
+//     }
+//    mergeSort(s,0,s->size-1);
+//     printf("The sorted array is:");
+//     printArray(s);
+//     return 0;
+
+
+ int i = 0;
+    struct array *s = (struct array *)malloc(sizeof(struct array));
+
+    // Open the file for reading
+    FILE *file = fopen("input.txt", "r");
+
+    if (file == NULL) {
+        fprintf(stderr, "Error opening the file.\n");
+        return 1;
     }
-   mergeSort(s,0,s->size-1);
+
+    // Read the size of the array from the file
+    fscanf(file, "%d", &(s->size));
+
+    // Allocate memory for the array
+    s->arr = (int *)malloc(s->size * sizeof(int));
+
+    // Read the elements of the array from the file
+    for (i = 0; i < s->size; i++) {
+        fscanf(file, "%d", &(s->arr[i]));
+    }
+
+    // Close the file
+    fclose(file);
+
+    // Perform merge sort
+    mergeSort(s, 0, s->size-1);
+
+    // Print the sorted array
     printf("The sorted array is:");
     printArray(s);
+
+    // Free allocated memory
+    free(s->arr);
+    free(s);
+
     return 0;
+
 }
 // _________________________________________
 // Depends on structure or content ?
